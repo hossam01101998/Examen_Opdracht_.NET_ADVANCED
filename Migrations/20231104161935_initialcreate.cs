@@ -43,7 +43,7 @@ namespace Examen_Opdracht_.NET_ADVANCED.Migrations
                 name: "Cars",
                 columns: table => new
                 {
-                    CarId = table.Column<int>(type: "int", nullable: false)
+                    CarID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerID = table.Column<int>(type: "int", nullable: false),
                     Make = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -53,7 +53,7 @@ namespace Examen_Opdracht_.NET_ADVANCED.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cars", x => x.CarId);
+                    table.PrimaryKey("PK_Cars", x => x.CarID);
                     table.ForeignKey(
                         name: "FK_Cars_Customers_CustomerID",
                         column: x => x.CustomerID,
@@ -80,7 +80,7 @@ namespace Examen_Opdracht_.NET_ADVANCED.Migrations
                         name: "FK_Appointments_Cars_CarID",
                         column: x => x.CarID,
                         principalTable: "Cars",
-                        principalColumn: "CarId",
+                        principalColumn: "CarID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Appointments_Customers_CustomerID",
@@ -109,7 +109,7 @@ namespace Examen_Opdracht_.NET_ADVANCED.Migrations
                         name: "FK_Invoices_Cars_CarID",
                         column: x => x.CarID,
                         principalTable: "Cars",
-                        principalColumn: "CarId");
+                        principalColumn: "CarID");
                     table.ForeignKey(
                         name: "FK_Invoices_Customers_CustomerID",
                         column: x => x.CustomerID,
@@ -125,7 +125,7 @@ namespace Examen_Opdracht_.NET_ADVANCED.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderDetails = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CarID = table.Column<int>(type: "int", nullable: false),
-                    CarId = table.Column<int>(type: "int", nullable: true)
+                    CarID1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -134,12 +134,12 @@ namespace Examen_Opdracht_.NET_ADVANCED.Migrations
                         name: "FK_Orders_Cars_CarID",
                         column: x => x.CarID,
                         principalTable: "Cars",
-                        principalColumn: "CarId");
+                        principalColumn: "CarID");
                     table.ForeignKey(
-                        name: "FK_Orders_Cars_CarId",
-                        column: x => x.CarId,
+                        name: "FK_Orders_Cars_CarID1",
+                        column: x => x.CarID1,
                         principalTable: "Cars",
-                        principalColumn: "CarId");
+                        principalColumn: "CarID");
                 });
 
             migrationBuilder.CreateIndex(
@@ -168,14 +168,14 @@ namespace Examen_Opdracht_.NET_ADVANCED.Migrations
                 column: "CustomerID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_CarId",
-                table: "Orders",
-                column: "CarId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Orders_CarID",
                 table: "Orders",
                 column: "CarID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_CarID1",
+                table: "Orders",
+                column: "CarID1");
         }
 
         /// <inheritdoc />

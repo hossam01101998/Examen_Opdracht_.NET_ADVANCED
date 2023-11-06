@@ -73,11 +73,11 @@ namespace Examen_Opdracht_.NET_ADVANCED.Migrations
 
             modelBuilder.Entity("Examen_Opdracht_.NET_ADVANCED.Model.Car", b =>
                 {
-                    b.Property<int>("CarId")
+                    b.Property<int>("CarID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CarId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CarID"));
 
                     b.Property<string>("ChassisNumber")
                         .IsRequired()
@@ -98,7 +98,7 @@ namespace Examen_Opdracht_.NET_ADVANCED.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CarId");
+                    b.HasKey("CarID");
 
                     b.HasIndex("CustomerID");
 
@@ -177,7 +177,7 @@ namespace Examen_Opdracht_.NET_ADVANCED.Migrations
                     b.Property<int>("CarID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CarId")
+                    b.Property<int?>("CarID1")
                         .HasColumnType("int");
 
                     b.Property<string>("OrderDetails")
@@ -188,7 +188,7 @@ namespace Examen_Opdracht_.NET_ADVANCED.Migrations
 
                     b.HasIndex("CarID");
 
-                    b.HasIndex("CarId");
+                    b.HasIndex("CarID1");
 
                     b.ToTable("Orders");
                 });
@@ -252,7 +252,7 @@ namespace Examen_Opdracht_.NET_ADVANCED.Migrations
 
                     b.HasOne("Examen_Opdracht_.NET_ADVANCED.Model.Car", null)
                         .WithMany("Orders")
-                        .HasForeignKey("CarId");
+                        .HasForeignKey("CarID1");
 
                     b.Navigation("Car");
                 });

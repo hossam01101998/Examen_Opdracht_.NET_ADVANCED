@@ -32,7 +32,7 @@ namespace Examen_Opdracht_.NET_ADVANCED
             modelBuilder.Entity<Customer>()
                 .HasMany(c => c.Cars)
                 .WithOne(car => car.Customer)
-                .HasForeignKey(car => car.CustomerID)
+                .HasForeignKey(car => car.CustomerId)
             .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Car>()

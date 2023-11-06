@@ -10,10 +10,10 @@ namespace Examen_Opdracht_.NET_ADVANCED.Model
 {
     internal class Car
     {
-        public int CarId { get; set; }
+        public int CarID { get; set; }
 
        //[ForeignKey("Customer")]
-        public int CustomerID { get; set; }
+        public int CustomerId { get; set; }
         public string Make { get; set; }
         public string Model { get; set; }
         public string LicensePlate { get; set; }
@@ -28,7 +28,7 @@ namespace Examen_Opdracht_.NET_ADVANCED.Model
 
         public Car(string make, string model, string licensePlate, Customer customer)
         {
-            CarId = GenerateUniqueId();
+            CarID = GenerateUniqueId();
             Make = make;
             Model = model;
             LicensePlate = licensePlate;
@@ -37,7 +37,7 @@ namespace Examen_Opdracht_.NET_ADVANCED.Model
         }
         public Car(string make, string model, string licensePlate, string chassisnumber, Customer customer)
         {
-            CarId = GenerateUniqueId();
+            CarID = GenerateUniqueId();
             Make = make;
             Model = model;
             LicensePlate = licensePlate;
