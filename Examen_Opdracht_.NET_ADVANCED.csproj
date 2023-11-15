@@ -8,12 +8,36 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\Appointment.jpg" />
+    <None Remove="Images\Capital.jpg" />
+    <None Remove="Images\car.jpg" />
+    <None Remove="Images\Customer.jpg" />
+    <None Remove="Images\Invoice.jpg" />
     <None Remove="Images\Mainwindow.jpg" />
+    <None Remove="Images\Order.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Images\Appointment.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Capital.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\car.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Customer.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Invoice.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Mainwindow.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Order.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 

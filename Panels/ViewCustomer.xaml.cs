@@ -58,6 +58,8 @@ namespace Examen_Opdracht_.NET_ADVANCED.Panels
 
         }
 
+
+
         private void btnCreateCustomer_Click(object sender, RoutedEventArgs e)
         {
             createForm.Visibility = Visibility.Visible;
@@ -69,6 +71,44 @@ namespace Examen_Opdracht_.NET_ADVANCED.Panels
             txtError.Text = string.Empty;
 
 
+        }
+
+
+        private void btnDeleteCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (lbCustomers.SelectedItem != null)
+                {
+                    Customer selectedCustomer = lbCustomers.SelectedItem as Customer;
+
+                    var carsToDelete = context.Cars.Where(c => c.CustomerId == selectedCustomer.CustomerId);
+                    foreach (var car in carsToDelete)
+                    {
+                        var ordersToDelete = context.Orders.Where(o => o.CarID == car.CarID);
+                        context.Orders.RemoveRange(ordersToDelete);
+                    }
+
+                    context.Cars.RemoveRange(carsToDelete);
+
+                    context.Customers.Remove(selectedCustomer);
+
+                    context.SaveChanges();
+
+                    customers = context.Customers.ToList();
+                    lbCustomers.ItemsSource = customers;
+
+                    createForm.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    throw new ArgumentException("You must select a customer.");
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                txtError.Text = ex.Message;
+            }
         }
 
         private void btnSaveCustomer_Click(object sender, RoutedEventArgs e)
@@ -96,21 +136,36 @@ namespace Examen_Opdracht_.NET_ADVANCED.Panels
                     throw new ArgumentException("The email cannot be empty.");
                 }
 
-
                 if (string.IsNullOrWhiteSpace(customerAddress))
                 {
                     throw new ArgumentException("The direction cannot be empty.");
                 }
 
-                var newCustomer = new Customer
-                {
-                    Name = customerName,
-                    Email = customerEmail,
-                    Adress = customerAddress
-                };
+                // buscamos si ya existe un cliente con el mismo nombre y email
 
-                context.Customers.Add(newCustomer);
-                context.SaveChanges();
+                var existingCustomer = context.Customers.FirstOrDefault(c => c.Name == customerName && c.Email == customerEmail);
+
+                if (existingCustomer != null)
+                {
+
+                    existingCustomer.Adress = customerAddress;
+
+                    context.SaveChanges();
+                }
+                else
+                {
+                    // si no existe, agregamos uno nuevo
+
+                    var newCustomer = new Customer
+                    {
+                        Name = customerName,
+                        Email = customerEmail,
+                        Adress = customerAddress
+                    };
+
+                    context.Customers.Add(newCustomer);
+                    context.SaveChanges();
+                }
 
                 customers = context.Customers.ToList();
                 lbCustomers.ItemsSource = customers;
@@ -120,10 +175,6 @@ namespace Examen_Opdracht_.NET_ADVANCED.Panels
             catch (ArgumentException ex)
             {
                 txtError.Text = ex.Message;
-
-                //spAddress.Visibility = Visibility.Visible;
-                txtError.Text = ex.Message;
-
             }
         }
 

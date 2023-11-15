@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Examen_Opdracht_.NET_ADVANCED.Migrations
 {
     [DbContext(typeof(MyDBContext))]
-    [Migration("20231104161935_initialcreate")]
-    partial class initialcreate
+    [Migration("20231115214240_second")]
+    partial class second
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,9 +39,6 @@ namespace Examen_Opdracht_.NET_ADVANCED.Migrations
                     b.Property<int>("CarID")
                         .HasColumnType("int");
 
-                    b.Property<int>("CustomerID")
-                        .HasColumnType("int");
-
                     b.Property<string>("RequiredService")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -53,8 +50,6 @@ namespace Examen_Opdracht_.NET_ADVANCED.Migrations
                     b.HasKey("AppointmentId");
 
                     b.HasIndex("CarID");
-
-                    b.HasIndex("CustomerID");
 
                     b.ToTable("Appointments");
                 });
@@ -86,7 +81,7 @@ namespace Examen_Opdracht_.NET_ADVANCED.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CustomerID")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<string>("LicensePlate")
@@ -103,7 +98,7 @@ namespace Examen_Opdracht_.NET_ADVANCED.Migrations
 
                     b.HasKey("CarID");
 
-                    b.HasIndex("CustomerID");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Cars");
                 });
@@ -196,6 +191,34 @@ namespace Examen_Opdracht_.NET_ADVANCED.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("Examen_Opdracht_.NET_ADVANCED.Models.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("Examen_Opdracht_.NET_ADVANCED.Model.Appointment", b =>
                 {
                     b.HasOne("Examen_Opdracht_.NET_ADVANCED.Model.Car", "Car")
@@ -204,22 +227,14 @@ namespace Examen_Opdracht_.NET_ADVANCED.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Examen_Opdracht_.NET_ADVANCED.Model.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Car");
-
-                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("Examen_Opdracht_.NET_ADVANCED.Model.Car", b =>
                 {
                     b.HasOne("Examen_Opdracht_.NET_ADVANCED.Model.Customer", "Customer")
                         .WithMany("Cars")
-                        .HasForeignKey("CustomerID")
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 

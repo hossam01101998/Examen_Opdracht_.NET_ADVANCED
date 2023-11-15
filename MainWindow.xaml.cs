@@ -7,15 +7,22 @@ using System.Windows.Controls;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Examen_Opdracht_.NET_ADVANCED.Panels;
+using Examen_Opdracht_.NET_ADVANCED.Data;
+using Examen_Opdracht_.NET_ADVANCED.Users;
 
 namespace Examen_Opdracht_.NET_ADVANCED
 {
     public partial class MainWindow : Window
     {
+        private MyDBContext context;
+
+        //private MyDBContext context = new MyDBContext();
         
 
         public MainWindow()
         {
+            //Initializer.DbSetInitializer(context);
+
             InitializeComponent();
 
 
@@ -43,9 +50,9 @@ namespace Examen_Opdracht_.NET_ADVANCED
 
         private void Capital_Click(object sender, RoutedEventArgs e)
         {
-            ViewCustomer viewCustomerWindow = new ViewCustomer();
+            ViewCapital viewCapitalWindow = new ViewCapital();
 
-            viewCustomerWindow.Show();
+            viewCapitalWindow.Show();
         }
 
         private void Invoice_Click(object sender, RoutedEventArgs e)
@@ -61,6 +68,12 @@ namespace Examen_Opdracht_.NET_ADVANCED
 
             viewAppointmentWindow.Show();
         }
+       /* private void Administrators_Click(object sender, RoutedEventArgs e)
+        {
+            AdministratorsWindow administratorsWindow = new AdministratorsWindow();
+
+            administratorsWindow.Show();
+        }*/
 
 
 

@@ -5,8 +5,95 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Examen_Opdracht_.NET_ADVANCED.Panels"
         mc:Ignorable="d"
-        Title="ViewInvoice" Height="450" Width="800">
+        Title="Invoices" WindowState="Maximized">
     <Grid>
-        
+
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/Invoice.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ListBox SelectionChanged="lbInvoices_SelectionChanged" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="2" SelectionMode="Single" Name="lbInvoices" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300" Height="500" Margin="30">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock >
+                            <Run Text="Invoice Details: "/>
+                            <Run Text="{Binding Details}" FontWeight="Bold" FontStyle="Italic"/>
+                        </TextBlock>
+
+                        <TextBlock >
+                            <Run Text="Customer: "/>
+                            <Run Text="{Binding Customer.Name}" FontWeight="Bold" FontStyle="Italic"/>
+                        </TextBlock>
+                        <TextBlock >
+                            <Run Text="Amount: "/>
+                            <Run Text="{Binding TotalAmount}" FontWeight="Bold" FontStyle="Italic"/>
+                            <Run Text="€" FontWeight="Bold" FontStyle="Italic"/>
+                        </TextBlock>
+
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox >
+
+        <Button Grid.Column="2" Grid.ColumnSpan="2" Content="Create New Invoice" BorderThickness="2" Background="CadetBlue" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top" Width="250" Height="80" Margin="20" Click="btnCreateInvoice_Click"/>
+
+        <Grid Margin="0 0 250 0" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="3" Name="createForm" Visibility="Collapsed">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+
+
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" FontWeight="Bold" FontSize="18">Invoice Date:</Label>
+            <DatePicker Grid.Row="0" Grid.Column="1"  Name="dpInvoiceDate" HorizontalAlignment="Right" VerticalAlignment="Top" Width="220" Margin="0,20"/>
+
+           
+            <Label Grid.Row="1" Grid.Column="0" FontWeight="Bold" FontSize="18" >Amount:</Label>
+            <TextBox Grid.Row="1" Grid.Column="1"  Name="txtInvoiceAmount" HorizontalAlignment="Right" VerticalAlignment="Top" Width="220" Margin="0,20"/>
+
+            <Label Grid.Row="2" Grid.Column="0" FontWeight="Bold" FontSize="18" >Invoice Details:</Label>
+            <TextBox Grid.Row="2" Grid.Column="1"  Name="txtInvoiceDetails" HorizontalAlignment="Right" VerticalAlignment="Top" Width="220" Margin="0,20"/>
+
+
+            <Label Grid.Row="3" Grid.Column="0" FontWeight="Bold" FontSize="18" >Customer</Label>
+            <ComboBox Name="cmbCustomer" Grid.Row="3" Grid.Column="1" Width="220" Height="35" Margin="0,20" DisplayMemberPath="Name" SelectedValuePath="CustomerId" SelectionChanged="cmbCustomer_SelectionChanged"/>
+
+            <Label Grid.Row="4" Grid.Column="0" FontWeight="Bold" FontSize="18" >Car</Label>
+            <ComboBox Name="cmbCar" Grid.Row="4" Grid.Column="1" Width="220" Height="35" Margin="0,20" DisplayMemberPath="Name" SelectedValuePath="CustomerId"/>
+            
+            <TextBlock Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Name="txtError" Text="" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10"/>
+
+            <Button Grid.Column="1" Grid.Row="5" Content="Save/Update Invoice" Background="CadetBlue" HorizontalAlignment="Center" VerticalAlignment="Top" Width="200" Height="30" Margin="0,10" FontSize="15" Click="btnSaveInvoice_Click"/>
+            <Button Grid.Column="0" Grid.Row="5" Content="Delete Invoice" Background="IndianRed" HorizontalAlignment="Center" VerticalAlignment="Top" Width="130" Height="30" Margin="0,10" FontSize="15" Click="btnDeleteInvoice_Click"/>
+
+
+        </Grid>
+
     </Grid>
 </Window>

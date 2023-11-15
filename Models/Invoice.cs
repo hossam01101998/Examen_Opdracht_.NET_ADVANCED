@@ -31,7 +31,7 @@ namespace Examen_Opdracht_.NET_ADVANCED.Model
 
         public Invoice(DateTime issueDate, decimal totalAmount, string details, Car car, Customer customer)
         {
-            
+
             IssueDate = issueDate;
             TotalAmount = totalAmount;
             Details = details;
